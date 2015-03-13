@@ -56,7 +56,7 @@ public class SAMLAttributeValve extends ValveBase {
 
     protected String attributeToVerify;
 
-    protected int requiredAttributeValue;
+    protected String requiredAttributeValue;
 
     protected boolean redirectOnAttributeMissing;
 
@@ -86,11 +86,11 @@ public class SAMLAttributeValve extends ValveBase {
         this.attributeToVerify = attributeToVerify;
     }
 
-    public int getAttributeValue() {
+    public String getRequiredAttributeValue() {
         return requiredAttributeValue;
     }
 
-    public void setAttributeValue(int attributeValue) {
+    public void setRequiredAttributeValue(String attributeValue) {
         this.requiredAttributeValue = attributeValue;
     }
 
@@ -119,6 +119,7 @@ public class SAMLAttributeValve extends ValveBase {
 
                 boolean matched = false;
 
+                //Go through all the SAML attributes, check for the presence of attributeToVerify set to the requiredAttributeValue
                 Assertion assertion = resp.getAssertions().get(0);
                 for (org.opensaml.saml2.core.AttributeStatement attr: assertion.getAttributeStatements()){
                     for(Attribute attribute: attr.getAttributes()){
@@ -135,23 +136,25 @@ public class SAMLAttributeValve extends ValveBase {
                     }
                 }
 
-                if (matched){
+
+                if (matched){ //we matched an attribute so allow call to proceed
                     getNext().invoke(request,response);
                 }
-                else {
-                    if (isRedirectOnAttributeMissing()) {
+                else { //we didn't match
+                    if (isRedirectOnAttributeMissing()) { //if we want to redirect, then redirect
                         response.sendRedirect(redirectUrl);
                         return;
                     }
-                    else {
-                        response.setStatus(403);
+                    else { //otherwise deny access
+                        response.reset();
+                        response.sendError(403);
                         return;
                     }
 
                 }
             }
             else{
-                //no saml response allow through
+                //no saml response found allow request to go through
                 getNext().invoke(request,response);
             }
         } catch (Base64DecodingException e) {
@@ -168,4 +171,6 @@ public class SAMLAttributeValve extends ValveBase {
 
 
     }
+
+
 }
