@@ -1,0 +1,14 @@
+apply plugin: 'java'
+
+sourceCompatibility = 1.5
+version = '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+    compile 'org.apache.tomcat:tomcat-catalina:7.0.26'
+    compile 'org.opensaml:opensaml:2.6.4'
+}

@@ -1,0 +1,31 @@
+# ignore gradle properties for runtime overrides
+gradle.properties
+
+# ignore IntelliJ files
+.idea
+*.iml
+*.ipr
+*.swp
+
+# ignore Vagrant deployments
+.vagrant
+
+# ignore build directories
+build
+target
+out
+.gradle
+
+# ignore OSX caches
+.DS_Store
+
+# ignore node debug logs
+npm-debug.log
+
+# ignore atlassian plugin config
+atlassian-ide-plugin.xml
+
+# random other stuff
+
+
+
