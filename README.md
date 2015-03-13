@@ -1,7 +1,5 @@
 # SAMLAttributeValve Usage Instructions:
 
-<pre>
-
 **Step 1.**
 Checkout the git project and run the gradle build to build a SAMLAttributeValve.jar file
 
@@ -51,4 +49,3 @@ attributeToVerify: This is the SAML attribute the valve will look for
 requiredAttributeValue: The valve will then match the attributeToVerify to the requiredAttributeValue, so for example someone with an authLevel = 1 could be checked by putting authLevel in attributeToVerify and 1 in requiredAttributeValue
 redirectOnAttributeMissing: A boolean value indicating if the match fails we wish to redirect the user to a different URL.
 redirectUrl: This value is required if redirectOnAttributeMissing is true, and is the URL we wish to redirect the user to should the match fail.
-</pre>
