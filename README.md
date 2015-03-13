@@ -3,7 +3,7 @@
 **Step 1.**
 Checkout the git project and run the gradle build to build a SAMLAttributeValve.jar file
 
-**Step 2. **
+**Step 2.**
 This jar file along with its dependencies must be put in your tomcat/lib directory.
 
 The dependencies are as follows: (Gradle will collect these for you but they are listed for posterity)
